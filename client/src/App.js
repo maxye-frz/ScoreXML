@@ -12,6 +12,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import ToggleButton from '@material-ui/lab/ToggleButton';
@@ -34,8 +37,17 @@ import ImportExportIcon from '@material-ui/icons/ImportExport';
 import DragHandleIcon from '@material-ui/icons/DragHandle';
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import GitHubIcon from '@material-ui/icons/GitHub';
+import ShareIcon from '@material-ui/icons/Share';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import * as ScoreApi from './api/ScoreApi.js';
+import { useParams } from "react-router-dom";
+require("dotenv").config();
 
-
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -96,7 +108,56 @@ const NumInput = styled(MuiInput)`
 
 export default function App() {
 
+
   const classes = useStyles();
+
+  const {shareId} = useParams();
+
+  // file state
+  const [file, setFile] = useState('');
+  // useEffect(() => {
+  //   // let current = window.location.href;
+  //   // console.log(window.location.href);
+  //   fetch(process.env.PUBLIC_URL + 'Gymnopdie_No._1_Satie.musicxml')
+  //     .then(response => response.text())
+  //     .then(text => {
+  //       setFile(text);
+  //     });
+  //   // if (current == BASE_URL + '/') {
+  //   //   // console.log("interesting");
+  //   //   fetch(process.env.PUBLIC_URL + 'Gymnopdie_No._1_Satie.musicxml')
+  //   //   .then(response => response.text())
+  //   //   .then(text => {
+  //   //     setFile(text);
+  //   //   });
+  //   // } else {
+  //   //   let db_id = current.substring(current.lastIndexOf('/') + 1);
+  //   //   getScore(db_id);
+  //   // }
+    
+  // }, []);
+
+  const [fileName, setFileName] = useState('');
+  const handleFileChange = (f, name) => {
+    setFile(f);
+    setFileName(name);
+    setUploadDialogOpen(false);
+  }
+
+  const getScore = (db_id) => {
+    // console.log("id: ", db_id);
+    ScoreApi.get(db_id).then((m) => {
+      // console.log(m);
+      setFileName(m.name);
+      setFile(m.musicxml);
+    })
+  }
+
+  if (shareId) {
+    getScore(shareId);
+  }
+
+  const [id, setId] = useState('');
 
   // upload dialog state
   const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
@@ -112,36 +173,41 @@ export default function App() {
   //save pdf
   const handleSavePDF = () => {
     const osmdCanvas = document.getElementById('osmdCanvas');
-    console.log(osmd);
+    // console.log(osmd);
     const svgElement = osmdCanvas.getElementsByTagName('svg').item(0);
     const width = svgElement.width.baseVal.value;
     const height = svgElement.height.baseVal.value;
     // console.log(width, height);
     const pdf = new jsPDF(width > height ? 'l' : 'p', 'pt', [width, height]);
-    console.log(fileName);
+    // console.log(fileName);
     pdf.svg(svgElement, {}).then(() => { pdf.save(fileName + ".pdf") });
   }
 
+  // share dialog state
+  const [shareDialogOpen, setShareDialogOpen] = useState(false);
+
+  const handleClickShareDialogOpen = () => {
+    setShareDialogOpen(true);
+  }
+
+  const handleShareDialogClose = (value) => {
+    setShareDialogOpen(false);
+  }
+
+  const uploadScore = () => {
+    ScoreApi.create(fileName[0], file).then((m) => {
+      // console.log(m._id);
+      setId(m._id);
+    })
+    .then(() => {
+      handleClickShareDialogOpen();
+    })
+  };
+
   const handleGitHub = () => {
-    window.open('https://github.com/maxye-frz/ScoreXML','_blank');
+    window.open(GITHUB_URL,'_blank');
   }
 
-
-  // file state
-  const [file, setFile] = useState('');
-  useEffect(() => {
-    fetch(process.env.PUBLIC_URL + 'Gymnopdie_No._1_Satie.musicxml')
-      .then(response => response.text())
-      .then(text => setFile(text));
-  }, []);
-
-  const [fileName, setFileName] = useState('Gymnopdie_No._1_Satie');
-  const handleFileChange = (f, name) => {
-    setFile(f);
-    setFileName(name);
-    setUploadDialogOpen(false);
-    //console.log("set global file state!");
-  }
 
   const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
   const handleChangeBackgroundColor = (color) => {
@@ -289,7 +355,7 @@ export default function App() {
             startIcon={<CloudUploadIcon />}
             size='large'
           >
-            import
+            Import
           </Button>
           <UploadDialog
             open={uploadDialogOpen}
@@ -303,8 +369,48 @@ export default function App() {
             startIcon={<PictureAsPdfIcon />}
             size='large'
           >
-            save
+            Save
           </Button>
+          <Button
+            color="primary"
+            // onClick={handleClickShareDialogOpen}
+            onClick={uploadScore}
+            className={classes.menuButton}
+            startIcon={<ShareIcon />}
+            size='large'
+          >
+            Share
+          </Button>
+          <Dialog
+            open={shareDialogOpen}
+            onClose={handleShareDialogClose}
+          >
+             <DialogTitle >Share and embed</DialogTitle>
+             <DialogContent>
+                <List>
+                  <ListItem>
+                  <Tooltip classes={{ tooltip: classes.tooltip }} title="copy to clipboard" arrow={true}>
+                    <ListItemButton
+                      onClick={() => {navigator.clipboard.writeText(BASE_URL+'/'+id)}}
+                    >
+                    <ListItemText primary={BASE_URL+'/'+id} />
+                    </ListItemButton>
+                  </Tooltip>
+                  </ListItem>
+                  <Divider />
+                  <ListItem>
+                  <Tooltip classes={{ tooltip: classes.tooltip }} title="copy to clipboard" arrow={true}>
+                    <ListItemButton
+                      onClick={() => {navigator.clipboard.writeText('<iframe src="'+BASE_URL+'/'+id+'" width="100%" height="500" frameBorder="0" allowfullscreen></iframe>')}}
+                    >
+                    <ListItemText primary={'<iframe src="'+BASE_URL+'/'+id+'" width="100%" height="500" frameBorder="0" allowfullscreen></iframe>'} />
+                    </ListItemButton>
+                  </Tooltip>
+                  </ListItem>
+                </List>
+                
+              </DialogContent>
+          </Dialog>
           <Button
             color="primary"
             onClick={handleGitHub}
@@ -320,7 +426,7 @@ export default function App() {
             startIcon={<HelpIcon />}
             size='large'
           >
-            help
+            Help
           </Button>
         </Toolbar>
         <Divider />
@@ -565,8 +671,6 @@ export default function App() {
               type: 'number',
             }}
           />
-
-
           <Divider flexItem orientation="vertical" className={classes.divider} />
 
           <Button onClick={handleDecrement}><ZoomOutIcon /></Button>
@@ -612,6 +716,7 @@ export default function App() {
         ledgerWidth={ledgerWidth}
         stemWidth={stemWidth}
       />
+
     </div>
 
   );
