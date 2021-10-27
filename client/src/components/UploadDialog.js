@@ -23,7 +23,7 @@ function UploadDialog(props) {
           onFileChange={handleFileUpload}
         />
       </DialogContent>
-      <DialogTitle id="simple-dialog-title">Under construction...</DialogTitle>
+      {/* <DialogTitle id="simple-dialog-title">Under construction...</DialogTitle> */}
     </Dialog>
   );
 }

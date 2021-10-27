@@ -2,6 +2,7 @@ import UploadDialog from './components/UploadDialog';
 import OSMD from './components/OSMD';
 import BackgroundColorPicker from './components/BackgroundColorPicker';
 import NoteHeadColorPicker from './components/NoteHeadColorPicker';
+import Hint from './components/Hint'
 import { jsPDF } from 'jspdf';
 import 'svg2pdf.js';
 import React, { useState, useEffect } from 'react';
@@ -42,6 +43,9 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Slider from '@mui/material/Slider';
 import * as ScoreApi from './api/ScoreApi.js';
 import { useParams } from "react-router-dom";
 require("dotenv").config();
@@ -105,37 +109,20 @@ const NumInput = styled(MuiInput)`
   width: 40px;
 `;
 
+const Input = styled(MuiInput)`
+  width: 42px;
+`;
+
 
 export default function App() {
 
 
   const classes = useStyles();
 
-  const {shareId} = useParams();
+  const { shareId } = useParams();
 
   // file state
   const [file, setFile] = useState('');
-  // useEffect(() => {
-  //   // let current = window.location.href;
-  //   // console.log(window.location.href);
-  //   fetch(process.env.PUBLIC_URL + 'Gymnopdie_No._1_Satie.musicxml')
-  //     .then(response => response.text())
-  //     .then(text => {
-  //       setFile(text);
-  //     });
-  //   // if (current == BASE_URL + '/') {
-  //   //   // console.log("interesting");
-  //   //   fetch(process.env.PUBLIC_URL + 'Gymnopdie_No._1_Satie.musicxml')
-  //   //   .then(response => response.text())
-  //   //   .then(text => {
-  //   //     setFile(text);
-  //   //   });
-  //   // } else {
-  //   //   let db_id = current.substring(current.lastIndexOf('/') + 1);
-  //   //   getScore(db_id);
-  //   // }
-    
-  // }, []);
 
   const [fileName, setFileName] = useState('');
   const handleFileChange = (f, name) => {
@@ -199,13 +186,13 @@ export default function App() {
       // console.log(m._id);
       setId(m._id);
     })
-    .then(() => {
-      handleClickShareDialogOpen();
-    })
+      .then(() => {
+        handleClickShareDialogOpen();
+      })
   };
 
   const handleGitHub = () => {
-    window.open(GITHUB_URL,'_blank');
+    window.open(GITHUB_URL, '_blank');
   }
 
 
@@ -238,6 +225,104 @@ export default function App() {
       setZoom(number);
     }
   }
+
+  const [thickness, setThickness] = useState({
+    selected: 'staff width',
+    staffWidth: 6,
+    staffDistance: 2,
+    ledgerWidth: 4,
+    stemWidth: 3
+  })
+
+  const handleFieldChange = (e => {
+    const { target } = e;
+    setThickness(thickness => ({
+      ...thickness,
+      selected: target.value
+    }))
+  })
+
+  const staffWidthArr = [0.01, 0.02, 0.04, 0.06, 0.08, 0.1, 0.15, 0.2, 0.25, 0.3]
+  const staffDistanceArr = [5, 8, 12, 18, 25, 30, 35, 40, 45, 50]
+  const ledgerWidthArr = [0.3, 0.5, 0.7, 1, 1.5, 2, 2.5, 3, 3.5, 4]
+  const stemWidthArr = [0.01, 0.02, 0.05, 0.08, 0.1, 0.12, 0.15, 0.2, 0.25, 0.3]
+
+  const sliderValue = (field) => {
+    if (field == 'staff width') {
+      return thickness.staffWidth
+    }
+    if (field == 'staff distance') {
+      return thickness.staffDistance
+    }
+    if (field == 'ledger width') {
+      return thickness.ledgerWidth
+    }
+    if (field == 'stem width') {
+      return thickness.stemWidth
+    }
+  }
+
+  const handleSliderChange = (event, newValue) => {
+    if (thickness.selected == 'staff width') {
+      setThickness(thickness => ({
+        ...thickness,
+        staffWidth: newValue
+      }));
+    }
+    if (thickness.selected == 'staff distance') {
+      setThickness(thickness => ({
+        ...thickness,
+        staffDistance: newValue
+      }));
+    }
+    if (thickness.selected== 'ledger width') {
+      setThickness(thickness => ({
+        ...thickness,
+        ledgerWidth: newValue
+      }));
+    }
+    if (thickness.selected == 'stem width') {
+      setThickness(thickness => ({
+        ...thickness,
+        stemWidth: newValue
+      }));
+    }
+  };
+
+  const handleThicknessInputChange = (event) => {
+    if (thickness.selected == 'staff width') {
+      setThickness(thickness => ({
+        ...thickness,
+        staffWidth: event.target.value === '' ? '' : Number(event.target.value)
+      }));
+    }
+    if (thickness.selected == 'staff distance') {
+      setThickness(thickness => ({
+        ...thickness,
+        staffDistance: event.target.value === '' ? '' : Number(event.target.value)
+      }));
+    }
+    if (thickness.selected== 'ledger width') {
+      setThickness(thickness => ({
+        ...thickness,
+        ledgerWidth: event.target.value === '' ? '' : Number(event.target.value)
+      }));
+    }
+    if (thickness.selected == 'stem width') {
+      setThickness(thickness => ({
+        ...thickness,
+        stemWidth: event.target.value === '' ? '' : Number(event.target.value)
+      }));
+    }
+  };
+
+  const handleBlur = () => {
+    if (sliderValue(thickness.selected) < 1) {
+      handleSliderChange(null, 1);
+    } else if (sliderValue(thickness.selected) > 10) {
+      handleSliderChange(null, 10);
+    }
+  };
 
 
   const [autoColoring, setAutoColoring] = useState(0);
@@ -279,66 +364,23 @@ export default function App() {
     setDrawMeasureStart(!drawMeasureStart);
   }
 
-  const [drawMeasureInterval, setDrawMeasureInterval] = useState(2);
+  const [drawMeasureInterval, setDrawMeasureInterval] = useState(1);
   const handleDrawMeasureInterval = (e) => {
     setDrawMeasureInterval(parseInt(e.target.value));
   }
 
-  const [staffWidth, setStaffWidth] = useState(0.1);
-  const handleStaffWidth = (e) => {
-    setStaffWidth(e.target.value === '' ? '' : Number(e.target.value));
-  }
-  const handleStaffBlur = () => {
-    if (staffWidth < 0.05) {
-      setStaffWidth(0.05);
-    } else if (staffWidth > 0.3) {
-      setStaffWidth(0.3);
-    }
-  };
-
-  const [staffDistance, setStaffDistance] = useState(8);
-  const handleStaffDistance = (e) => {
-    setStaffDistance(e.target.value === '' ? '' : Number(e.target.value));
-  }
-  const handleDistanceBlur = () => {
-    if (staffDistance < 1) {
-      setStaffDistance(1);
-    } else if (staffDistance > 50) {
-      setStaffDistance(50);
-    }
-  };
-
-  const [ledgerWidth, setLedgerWidth] = useState(1);
-  const handleLedgerWidth = (e) => {
-    setLedgerWidth(e.target.value === '' ? '' : Number(e.target.value));
-  }
-  const handleLedgerBlur = () => {
-    if (ledgerWidth <= 0.5) {
-      setLedgerWidth(0.5);
-    } else if (staffWidth > 4) {
-      setLedgerWidth(4);
-    }
-  };
-
-  const [stemWidth, setStemWidth] = useState(0.1);
-  const handleStemWidth = (e) => {
-    setStemWidth(e.target.value === '' ? '' : Number(e.target.value));
-  }
-  const handleStemBlur = () => {
-    if (stemWidth <= 0.01) {
-      setStemWidth(0.01);
-    } else if (stemWidth > 0.3) {
-      setStemWidth(0.3);
-    }
-  };
 
   const [singleHorizontal, setSingleHorizontal] = useState(false);
   const handleSingleHorizontal = () => {
     setSingleHorizontal(!singleHorizontal);
+    setBackgroundColor('#FFFFFF');
   }
 
   const [osmd, setOsmd] = useState(new window.opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", { backend: "svg", autoResize: true }));
 
+  function valuetext(value) {
+    return `${value}`;
+  }
 
 
   return (
@@ -384,32 +426,38 @@ export default function App() {
           <Dialog
             open={shareDialogOpen}
             onClose={handleShareDialogClose}
+            fullWidth
+            maxWidth="md"
+            fullHeight
+            minHeight="md"
           >
-             <DialogTitle >Share and embed</DialogTitle>
-             <DialogContent>
-                <List>
-                  <ListItem>
+            <DialogTitle >Share and embed</DialogTitle>
+            <DialogContent>
+              <List>
+                <ListItem>
                   <Tooltip classes={{ tooltip: classes.tooltip }} title="copy to clipboard" arrow={true}>
                     <ListItemButton
-                      onClick={() => {navigator.clipboard.writeText(BASE_URL+'/'+id)}}
+                      onClick={() => { navigator.clipboard.writeText(BASE_URL + '/' + id) }}
                     >
-                    <ListItemText primary={BASE_URL+'/'+id} />
+                      <ListItemText primary={BASE_URL + '/' + id} />
                     </ListItemButton>
                   </Tooltip>
-                  </ListItem>
-                  <Divider />
-                  <ListItem>
+                </ListItem>
+                <Divider />
+                <ListItem>
                   <Tooltip classes={{ tooltip: classes.tooltip }} title="copy to clipboard" arrow={true}>
                     <ListItemButton
-                      onClick={() => {navigator.clipboard.writeText('<iframe src="'+BASE_URL+'/'+id+'" width="100%" height="500" frameBorder="0" allowfullscreen></iframe>')}}
+                      onClick={() => { navigator.clipboard.writeText('<iframe src="' + BASE_URL + '/' + id + '" width="100%" height="100%" frameBorder="0" allowfullscreen></iframe>') }}
                     >
-                    <ListItemText primary={'<iframe src="'+BASE_URL+'/'+id+'" width="100%" height="500" frameBorder="0" allowfullscreen></iframe>'} />
+                      <ListItemText primary={'<iframe src="' + BASE_URL + '/' + id + '" width="100%" height="100%" frameBorder="0" allowfullscreen></iframe>'} />
                     </ListItemButton>
                   </Tooltip>
-                  </ListItem>
-                </List>
+                </ListItem>
                 
-              </DialogContent>
+                <iframe src={BASE_URL + '/' + id} position="relative" width="100%" height="500" />
+              </List>
+
+            </DialogContent>
           </Dialog>
           <Button
             color="primary"
@@ -604,73 +652,52 @@ export default function App() {
           </Tooltip>
           <Divider flexItem orientation="vertical" className={classes.divider} />
 
-          <Typography variant="body1">
-            Staff width:
-          </Typography>
-          <NumInput
-            disableUnderline={true}
-            value={staffWidth}
-            size="small"
-            onChange={handleStaffWidth}
-            onBlur={handleStaffBlur}
-            inputProps={{
-              step: 0.05,
-              min: 0,
-              max: 0.3,
-              type: 'number',
-            }}
-          />
+          <Box sx={{ width: 350 }}>
+          
+            <Grid container spacing={2} alignItems="center">
+              <Grid item>
+              <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 40 }}>
+              <Select
+                native
+                value={thickness.selected}
+                onChange={handleFieldChange}
+                input={<OutlinedInput classes={{ input: classes.input }} />}
+              >
+                <option value={'staff width'}>staff width</option>
+                <option value={'staff distance'}>staff distance</option>
+                <option value={'ledger width'}>ledger width</option>
+                <option value={'stem width'}>stem width</option>
+              </Select>
+            </FormControl>
+              </Grid>
+              <Grid item xs>
+                <Slider
+                  step={1}
+                  min={0}
+                  max={10}
+                  value={sliderValue(thickness.selected)}
+                  onChange={handleSliderChange}
+                  aria-labelledby="input-slider"
+                />
+              </Grid>
+              <Grid item>
+                <Input
+                  value={sliderValue(thickness.selected)}
+                  size="small"
+                  onChange={handleThicknessInputChange}
+                  onBlur={handleBlur}
+                  inputProps={{
+                    step: 1,
+                    min: 0,
+                    max: 10,
+                    type: 'number',
+                    'aria-labelledby': 'input-slider',
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </Box>
 
-          <Typography variant="body1">
-            Staff distance:
-          </Typography>
-          <NumInput
-            disableUnderline={true}
-            value={staffDistance}
-            size="small"
-            onChange={handleStaffDistance}
-            onBlur={handleDistanceBlur}
-            inputProps={{
-              step: 1,
-              min: 1,
-              max: 50,
-              type: 'number',
-            }}
-          />
-
-          <Typography variant="body1">
-            Ledger width:
-          </Typography>
-          <NumInput
-            disableUnderline={true}
-            value={ledgerWidth}
-            size="small"
-            onChange={handleLedgerWidth}
-            onBlur={handleLedgerBlur}
-            inputProps={{
-              step: 0.5,
-              min: 0.5,
-              max: 4,
-              type: 'number',
-            }}
-          />
-
-          <Typography variant="body1">
-            Stem width:
-          </Typography>
-          <NumInput
-            disableUnderline={true}
-            value={stemWidth}
-            size="small"
-            onChange={handleStemWidth}
-            onBlur={handleStemBlur}
-            inputProps={{
-              step: 0.01,
-              min: 0.01,
-              max: 0.3,
-              type: 'number',
-            }}
-          />
           <Divider flexItem orientation="vertical" className={classes.divider} />
 
           <Button onClick={handleDecrement}><ZoomOutIcon /></Button>
@@ -711,11 +738,12 @@ export default function App() {
         fingeringPosition={fingeringPosition}
         isFlatBeam={isFlatBeam}
 
-        staffWidth={staffWidth}
-        staffDistance={staffDistance}
-        ledgerWidth={ledgerWidth}
-        stemWidth={stemWidth}
+        staffWidth={staffWidthArr[thickness.staffWidth]}
+        staffDistance={staffDistanceArr[thickness.staffDistance]}
+        ledgerWidth={ledgerWidthArr[thickness.ledgerWidth]}
+        stemWidth={stemWidthArr[thickness.stemWidth]}
       />
+      <Hint file={file}/>
 
     </div>
 
