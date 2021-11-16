@@ -4,7 +4,7 @@ import Link from '@mui/material/Link';
 function Hint(props) {
     const file = props.file;
     if (file === '') {
-        console.log("display")
+        
         return (
             <div>
                 <Typography variant="h6" align="center" style={{

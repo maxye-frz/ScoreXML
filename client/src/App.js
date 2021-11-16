@@ -336,7 +336,7 @@ export default function App() {
   const [isBold, setIsBold] = useState(0);
   const handleBold = () => { setIsBold(1 - isBold) };
 
-  const [drawFingerings, setDrawFingerings] = useState(false);
+  const [drawFingerings, setDrawFingerings] = useState(true);
   const handleDrawFingerings = () => {
     setDrawFingerings(!drawFingerings);
     setExpandFingerings(drawFingerings);
@@ -386,6 +386,7 @@ export default function App() {
   return (
     <div>
       <AppBar position="static" color="default" className={classes.appBar}>
+        
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             ScoreXML
@@ -479,6 +480,7 @@ export default function App() {
         </Toolbar>
         <Divider />
         <Toolbar className={classes.customizeToolbar}>
+          
           <FormControl style={{ minWidth: 160 }}>
             <Tooltip classes={{ tooltip: classes.tooltip }} title="Font" arrow={true}>
               <Select
@@ -585,7 +587,7 @@ export default function App() {
 
           <Tooltip classes={{ tooltip: classes.tooltip }} title="Fingering position" arrow={true}>
 
-            <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 60 }} >
+            <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 100 }} >
               <Select
                 native
                 value={fingeringPosition}
@@ -627,7 +629,7 @@ export default function App() {
           </Tooltip>
           <Tooltip classes={{ tooltip: classes.tooltip }} title="Measure number interval" arrow={true}>
 
-            <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 40 }}>
+            <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 60 }}>
               <Select
                 native
                 value={drawMeasureInterval}
@@ -656,7 +658,7 @@ export default function App() {
           
             <Grid container spacing={2} alignItems="center">
               <Grid item>
-              <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 40 }}>
+              <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 160 }}>
               <Select
                 native
                 value={thickness.selected}
@@ -707,6 +709,7 @@ export default function App() {
               value={zoom}
               size="small"
               variant="outlined"
+              style={{ minWidth: 80 }}
               // disableUnderline={false}
               className={classes.zoomTextField}
               InputProps={{
@@ -744,7 +747,6 @@ export default function App() {
         stemWidth={stemWidthArr[thickness.stemWidth]}
       />
       <Hint file={file}/>
-
     </div>
 
   );
