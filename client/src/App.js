@@ -248,40 +248,40 @@ export default function App() {
   const stemWidthArr = [0.01, 0.02, 0.05, 0.08, 0.1, 0.12, 0.15, 0.2, 0.25, 0.3]
 
   const sliderValue = (field) => {
-    if (field == 'staff width') {
+    if (field === 'staff width') {
       return thickness.staffWidth
     }
-    if (field == 'staff distance') {
+    if (field === 'staff distance') {
       return thickness.staffDistance
     }
-    if (field == 'ledger width') {
+    if (field === 'ledger width') {
       return thickness.ledgerWidth
     }
-    if (field == 'stem width') {
+    if (field === 'stem width') {
       return thickness.stemWidth
     }
   }
 
   const handleSliderChange = (event, newValue) => {
-    if (thickness.selected == 'staff width') {
+    if (thickness.selected === 'staff width') {
       setThickness(thickness => ({
         ...thickness,
         staffWidth: newValue
       }));
     }
-    if (thickness.selected == 'staff distance') {
+    if (thickness.selected === 'staff distance') {
       setThickness(thickness => ({
         ...thickness,
         staffDistance: newValue
       }));
     }
-    if (thickness.selected== 'ledger width') {
+    if (thickness.selected === 'ledger width') {
       setThickness(thickness => ({
         ...thickness,
         ledgerWidth: newValue
       }));
     }
-    if (thickness.selected == 'stem width') {
+    if (thickness.selected === 'stem width') {
       setThickness(thickness => ({
         ...thickness,
         stemWidth: newValue
@@ -290,25 +290,25 @@ export default function App() {
   };
 
   const handleThicknessInputChange = (event) => {
-    if (thickness.selected == 'staff width') {
+    if (thickness.selected === 'staff width') {
       setThickness(thickness => ({
         ...thickness,
         staffWidth: event.target.value === '' ? '' : Number(event.target.value)
       }));
     }
-    if (thickness.selected == 'staff distance') {
+    if (thickness.selected === 'staff distance') {
       setThickness(thickness => ({
         ...thickness,
         staffDistance: event.target.value === '' ? '' : Number(event.target.value)
       }));
     }
-    if (thickness.selected== 'ledger width') {
+    if (thickness.selected === 'ledger width') {
       setThickness(thickness => ({
         ...thickness,
         ledgerWidth: event.target.value === '' ? '' : Number(event.target.value)
       }));
     }
-    if (thickness.selected == 'stem width') {
+    if (thickness.selected === 'stem width') {
       setThickness(thickness => ({
         ...thickness,
         stemWidth: event.target.value === '' ? '' : Number(event.target.value)
@@ -386,7 +386,7 @@ export default function App() {
   return (
     <div>
       <AppBar position="static" color="default" className={classes.appBar}>
-        
+
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             ScoreXML
@@ -454,7 +454,7 @@ export default function App() {
                     </ListItemButton>
                   </Tooltip>
                 </ListItem>
-                
+
                 <iframe src={BASE_URL + '/' + id} position="relative" width="100%" height="500" />
               </List>
 
@@ -480,62 +480,307 @@ export default function App() {
         </Toolbar>
         <Divider />
         <Toolbar className={classes.customizeToolbar}>
-          
-          <FormControl style={{ minWidth: 160 }}>
-            <Tooltip classes={{ tooltip: classes.tooltip }} title="Font" arrow={true}>
-              <Select
-                labelId="font-select"
-                id="font-select"
-                value={font}
-                onChange={handleFontChange}
-                MenuProps={{
-                  anchorOrigin: {
-                    vertical: "bottom",
-                    horizontal: "left"
-                  },
-                  transformOrigin: {
-                    vertical: "top",
-                    horizontal: "left"
-                  },
-                  getContentAnchorEl: null
-                }}
-                autoWidth="true"
-              >
-                <MenuItem value={"Arial"} style={{ 'fontFamily': 'Arial' }}>Arial</MenuItem>
-                <MenuItem value={"Calibri"} style={{ 'fontFamily': 'Calibri' }}>Calibri</MenuItem>
-                <MenuItem value={"Cambria"} style={{ 'fontFamily': 'Cambria' }}>Cambria</MenuItem>
-                <MenuItem value={"Courier New"} style={{ 'fontFamily': 'Courier New' }}>Courier New</MenuItem>
-                <MenuItem value={"Futura"} style={{ 'fontFamily': 'Futura' }}>Futura</MenuItem>
-                <MenuItem value={"Garamond"} style={{ 'fontFamily': 'Garamond' }}>Garamond</MenuItem>
-                <MenuItem value={"Georgia"} style={{ 'fontFamily': 'Georgia' }}>Georgia</MenuItem>
-                <MenuItem value={"Helvetica"} style={{ 'fontFamily': 'Helvetica' }}>Helvetica</MenuItem>
-                <MenuItem value={"Times New Roman"} style={{ 'fontFamily': 'Times New Roman' }}>Times New Roman</MenuItem>
-                <MenuItem value={"Verdana"} style={{ 'fontFamily': 'Verdana' }}>Verdana</MenuItem>
-              </Select>
-            </Tooltip>
-          </FormControl>
 
-          <Tooltip classes={{ tooltip: classes.tooltip }} title="Bold" arrow={true}>
+          <Grid container spacing={0}>
+            <Grid item>
+              <Box sx={{ width: 230 }}>
+                <Grid container spacing={1} alignItems="center">
+                  <Grid item>
+                    <FormControl style={{ minWidth: 160 }}>
+                      <Tooltip classes={{ tooltip: classes.tooltip }} title="Font" arrow={true}>
+                        <Select
+                          labelId="font-select"
+                          id="font-select"
+                          value={font}
+                          onChange={handleFontChange}
+                          MenuProps={{
+                            anchorOrigin: {
+                              vertical: "bottom",
+                              horizontal: "left"
+                            },
+                            transformOrigin: {
+                              vertical: "top",
+                              horizontal: "left"
+                            },
+                            getContentAnchorEl: null
+                          }}
+                          autoWidth="true"
+                        >
+                          <MenuItem value={"Arial"} style={{ 'fontFamily': 'Arial' }}>Arial</MenuItem>
+                          <MenuItem value={"Calibri"} style={{ 'fontFamily': 'Calibri' }}>Calibri</MenuItem>
+                          <MenuItem value={"Cambria"} style={{ 'fontFamily': 'Cambria' }}>Cambria</MenuItem>
+                          <MenuItem value={"Courier New"} style={{ 'fontFamily': 'Courier New' }}>Courier New</MenuItem>
+                          <MenuItem value={"Futura"} style={{ 'fontFamily': 'Futura' }}>Futura</MenuItem>
+                          <MenuItem value={"Garamond"} style={{ 'fontFamily': 'Garamond' }}>Garamond</MenuItem>
+                          <MenuItem value={"Georgia"} style={{ 'fontFamily': 'Georgia' }}>Georgia</MenuItem>
+                          <MenuItem value={"Helvetica"} style={{ 'fontFamily': 'Helvetica' }}>Helvetica</MenuItem>
+                          <MenuItem value={"Times New Roman"} style={{ 'fontFamily': 'Times New Roman' }}>Times New Roman</MenuItem>
+                          <MenuItem value={"Verdana"} style={{ 'fontFamily': 'Verdana' }}>Verdana</MenuItem>
+                        </Select>
+                      </Tooltip>
+                    </FormControl>
+                  </Grid>
+                  <Grid item>
+                    <Tooltip classes={{ tooltip: classes.tooltip }} title="Bold" arrow={true}>
 
-            <ToggleButton
-              className={classes.toggleButton}
-              value="bold"
-              selected={isBold}
-              onChange={handleBold}
-            >
-              <FormatBoldIcon />
-            </ToggleButton>
+                      <ToggleButton
+                        className={classes.toggleButton}
+                        value="bold"
+                        selected={isBold}
+                        onChange={handleBold}
+                      >
+                        <FormatBoldIcon />
+                      </ToggleButton>
+                    </Tooltip>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Grid>
 
-          </Tooltip>
+            <Grid item>
 
-          <Divider flexItem orientation="vertical" className={classes.divider} />
+              <Box sx={{ width: 190 }}>
+                <Grid container spacing={1} alignItems="center">
+                  <Grid item>
+                    <BackgroundColorPicker
+                      color={backgroundColor}
+                      handleChange={handleChangeBackgroundColor}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <NoteHeadColorPicker
+                      color={noteHeadColor}
+                      handleChange={handleChangeNoteHeadColor}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <Tooltip classes={{ tooltip: classes.tooltip }} title="Automatic color" arrow={true}>
+                      <ToggleButton
+                        className={classes.toggleButton}
+                        value="autoColoring"
+                        selected={autoColoring}
+                        onChange={handleAutoColoring}
+                      >
+                        <FormatColorTextIcon />
+                      </ToggleButton>
+                    </Tooltip>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Grid>
+
+            <Grid item>
+              <Box sx={{ width: 240 }}>
+                <Grid container spacing={1} alignItems="center">
+                  <Grid item>
+                    <Tooltip classes={{ tooltip: classes.tooltip }} title="Show fingering" arrow={true}>
+
+                      <ToggleButton
+                        className={classes.toggleButton}
+                        value="drawFingerings"
+                        selected={drawFingerings}
+                        onChange={handleDrawFingerings}
+                      >
+                        <PanToolIcon />
+                      </ToggleButton>
+
+                    </Tooltip>
+                  </Grid>
+                  <Grid item>
+                    <Tooltip classes={{ tooltip: classes.tooltip }} title="Expand fingering" arrow={true}>
+
+                      <ToggleButton
+                        className={classes.toggleButton}
+                        value="expandFingerings"
+                        selected={!expandFingerings}
+                        onChange={handleExpandFingerings}
+                      >
+                        <ImportExportIcon />
+                      </ToggleButton>
+
+                    </Tooltip>
+                  </Grid>
+
+                  <Grid item>
+
+                    <Tooltip classes={{ tooltip: classes.tooltip }} title="Fingering position" arrow={true}>
+
+                      <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 100 }} >
+                        <Select
+                          native
+                          value={fingeringPosition}
+                          onChange={handleSetFingeringPosition}
+                          input={<OutlinedInput classes={{ input: classes.input }} />}
+                        >
+                          <option value={"above"}>Above</option>
+                          <option value={"below"}>Below</option>
+                          <option value={"left"}>Left</option>
+                          <option value={"right"}>Right</option>
+                        </Select>
+                      </FormControl>
+                    </Tooltip>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Grid>
+
+            <Grid item>
+              <Box sx={{ width: 150 }}>
+                <Grid container spacing={1} alignItems="center">
+                  <Grid item>
+                    <Tooltip classes={{ tooltip: classes.tooltip }} title="Show measure number new line" arrow={true}>
+
+                      <ToggleButton
+                        className={classes.toggleButton}
+                        value="drawMeasureStart"
+                        selected={drawMeasureStart}
+                        onChange={handleDrawMeasureStart}
+                      >
+                        <FormatListNumberedIcon />
+                      </ToggleButton>
+                    </Tooltip>
+                  </Grid>
+                  <Grid item>
+                    <Tooltip classes={{ tooltip: classes.tooltip }} title="Measure number interval" arrow={true}>
+
+                      <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 60 }}>
+                        <Select
+                          native
+                          value={drawMeasureInterval}
+                          onChange={handleDrawMeasureInterval}
+                          input={<OutlinedInput classes={{ input: classes.input }} />}
+                        >
+                          <option value={1}>1</option>
+                          <option value={2}>2</option>
+                          <option value={3}>3</option>
+                          <option value={4}>4</option>
+                        </Select>
+                      </FormControl>
+                    </Tooltip>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Grid>
+
+            <Grid item>
+              <Box sx={{ width: 100 }}>
+                <Grid container spacing={0} alignItems="center">
+
+                  <Grid item>
+                    <Tooltip classes={{ tooltip: classes.tooltip }} title="Flat beam" arrow={true}>
+
+                      <ToggleButton
+                        className={classes.toggleButton}
+                        value="isFlatBeam"
+                        selected={isFlatBeam}
+                        onChange={handleIsFlatBeam}
+                      >
+                        <DragHandleIcon />
+                      </ToggleButton>
+
+                    </Tooltip>
+                  </Grid>
+                  <Grid item>
+                    <Tooltip classes={{ tooltip: classes.tooltip }} title="Show in one line" arrow={true}>
+
+                      <IconButton onClick={handleSingleHorizontal}>
+                        <ArrowRightAltIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Grid>
+
+            <Grid item>
+              <Box sx={{ width: 350 }}>
+                <Grid container spacing={1} alignItems="center">
+                  <Grid item>
+                    <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 160 }}>
+                      <Select
+                        native
+                        value={thickness.selected}
+                        onChange={handleFieldChange}
+                        input={<OutlinedInput classes={{ input: classes.input }} />}
+                      >
+                        <option value={'staff width'}>staff width</option>
+                        <option value={'staff distance'}>staff distance</option>
+                        <option value={'ledger width'}>ledger width</option>
+                        <option value={'stem width'}>stem width</option>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs>
+                    <Slider
+                      step={1}
+                      min={0}
+                      max={10}
+                      value={sliderValue(thickness.selected)}
+                      onChange={handleSliderChange}
+                      aria-labelledby="input-slider"
+                    />
+                  </Grid>
+                  <Grid item>
+                    <Input
+                      value={sliderValue(thickness.selected)}
+                      size="small"
+                      onChange={handleThicknessInputChange}
+                      onBlur={handleBlur}
+                      inputProps={{
+                        step: 1,
+                        min: 0,
+                        max: 10,
+                        type: 'number',
+                        'aria-labelledby': 'input-slider',
+                      }}
+                    />
+                  </Grid>
+                </Grid>
+              </Box>
+            </Grid>
+
+            <Grid item>
+              <Box sx={{ width: 230 }}>
+                <Grid container spacing={1} alignItems="center">
+                  <Grid item>
+                    <Button onClick={handleDecrement}><ZoomOutIcon /></Button>
+                  </Grid>
+                  <Grid item>
+                    <Tooltip classes={{ tooltip: classes.tooltip }} title="Zoom" arrow={true}>
+
+                      <TextField
+                        value={zoom}
+                        size="small"
+                        variant="outlined"
+                        style={{ minWidth: 80 }}
+                        // disableUnderline={false}
+                        className={classes.zoomTextField}
+                        InputProps={{
+                          endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                        }}
+                        onChange={changeZoom}
+                      />
+                    </Tooltip>
+                  </Grid>
+                  <Grid item>
+                    <Button onClick={handleIncrement}><ZoomInIcon /></Button>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Grid>
+
+
+
+          </Grid>
+
+          {/* <Divider flexItem orientation="vertical" className={classes.divider} /> */}
 
           {/* <IconButton onClick={handleBold}>
                 <FormatBoldIcon />
             </IconButton> */}
 
 
-          <BackgroundColorPicker
+          {/* <BackgroundColorPicker
             color={backgroundColor}
             handleChange={handleChangeBackgroundColor}
           />
@@ -556,11 +801,11 @@ export default function App() {
             >
               <FormatColorTextIcon />
             </ToggleButton>
-          </Tooltip>
+          </Tooltip> */}
 
-          <Divider flexItem orientation="vertical" className={classes.divider} />
+          {/* <Divider flexItem orientation="vertical" className={classes.divider} /> */}
 
-          <Tooltip classes={{ tooltip: classes.tooltip }} title="Show fingering" arrow={true}>
+          {/* <Tooltip classes={{ tooltip: classes.tooltip }} title="Show fingering" arrow={true}>
 
             <ToggleButton
               className={classes.toggleButton}
@@ -600,9 +845,9 @@ export default function App() {
                 <option value={"right"}>Right</option>
               </Select>
             </FormControl>
-          </Tooltip>
-          <Divider flexItem orientation="vertical" className={classes.divider} />
-          <Tooltip classes={{ tooltip: classes.tooltip }} title="Flat beam" arrow={true}>
+          </Tooltip> */}
+          {/* <Divider flexItem orientation="vertical" className={classes.divider} /> */}
+          {/* <Tooltip classes={{ tooltip: classes.tooltip }} title="Flat beam" arrow={true}>
 
             <ToggleButton
               className={classes.toggleButton}
@@ -613,10 +858,10 @@ export default function App() {
               <DragHandleIcon />
             </ToggleButton>
 
-          </Tooltip>
+          </Tooltip> */}
 
-          <Divider flexItem orientation="vertical" className={classes.divider} />
-          <Tooltip classes={{ tooltip: classes.tooltip }} title="Show measure number new line" arrow={true}>
+          {/* <Divider flexItem orientation="vertical" className={classes.divider} /> */}
+          {/* <Tooltip classes={{ tooltip: classes.tooltip }} title="Show measure number new line" arrow={true}>
 
             <ToggleButton
               className={classes.toggleButton}
@@ -642,35 +887,34 @@ export default function App() {
                 <option value={4}>4</option>
               </Select>
             </FormControl>
-          </Tooltip>
+          </Tooltip> */}
 
-          <Divider flexItem orientation="vertical" className={classes.divider} />
+          {/* <Divider flexItem orientation="vertical" className={classes.divider} /> */}
 
-          <Tooltip classes={{ tooltip: classes.tooltip }} title="Show in one line" arrow={true}>
+          {/* <Tooltip classes={{ tooltip: classes.tooltip }} title="Show in one line" arrow={true}>
 
             <IconButton onClick={handleSingleHorizontal}>
               <ArrowRightAltIcon />
             </IconButton>
-          </Tooltip>
-          <Divider flexItem orientation="vertical" className={classes.divider} />
+          </Tooltip> */}
+          {/* <Divider flexItem orientation="vertical" className={classes.divider} /> */}
 
-          <Box sx={{ width: 350 }}>
-          
+          {/* <Box sx={{ width: 350 }}>
             <Grid container spacing={2} alignItems="center">
               <Grid item>
-              <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 160 }}>
-              <Select
-                native
-                value={thickness.selected}
-                onChange={handleFieldChange}
-                input={<OutlinedInput classes={{ input: classes.input }} />}
-              >
-                <option value={'staff width'}>staff width</option>
-                <option value={'staff distance'}>staff distance</option>
-                <option value={'ledger width'}>ledger width</option>
-                <option value={'stem width'}>stem width</option>
-              </Select>
-            </FormControl>
+                <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 160 }}>
+                  <Select
+                    native
+                    value={thickness.selected}
+                    onChange={handleFieldChange}
+                    input={<OutlinedInput classes={{ input: classes.input }} />}
+                  >
+                    <option value={'staff width'}>staff width</option>
+                    <option value={'staff distance'}>staff distance</option>
+                    <option value={'ledger width'}>ledger width</option>
+                    <option value={'stem width'}>stem width</option>
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs>
                 <Slider
@@ -698,11 +942,11 @@ export default function App() {
                 />
               </Grid>
             </Grid>
-          </Box>
+          </Box> */}
 
-          <Divider flexItem orientation="vertical" className={classes.divider} />
+          {/* <Divider flexItem orientation="vertical" className={classes.divider} /> */}
 
-          <Button onClick={handleDecrement}><ZoomOutIcon /></Button>
+          {/* <Button onClick={handleDecrement}><ZoomOutIcon /></Button>
           <Tooltip classes={{ tooltip: classes.tooltip }} title="Zoom" arrow={true}>
 
             <TextField
@@ -718,7 +962,7 @@ export default function App() {
               onChange={changeZoom}
             />
           </Tooltip>
-          <Button onClick={handleIncrement}><ZoomInIcon /></Button>
+          <Button onClick={handleIncrement}><ZoomInIcon /></Button> */}
 
         </Toolbar>
       </AppBar>
@@ -746,7 +990,7 @@ export default function App() {
         ledgerWidth={ledgerWidthArr[thickness.ledgerWidth]}
         stemWidth={stemWidthArr[thickness.stemWidth]}
       />
-      <Hint file={file}/>
+      <Hint file={file} />
     </div>
 
   );
