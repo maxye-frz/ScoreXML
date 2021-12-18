@@ -46,6 +46,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Slider from '@mui/material/Slider';
+import Link from '@mui/material/Link';
 import * as ScoreApi from './api/ScoreApi.js';
 import { useParams } from "react-router-dom";
 require("dotenv").config();
@@ -177,8 +178,19 @@ export default function App() {
     setShareDialogOpen(true);
   }
 
-  const handleShareDialogClose = (value) => {
+  const handleShareDialogClose = () => {
     setShareDialogOpen(false);
+  }
+
+  // help dialog state
+  const [helpDialogOpen, setHelpDialogOpen] = useState(false);
+
+  const handleClickHelpDialogOpen = () => {
+    setHelpDialogOpen(true);
+  }
+
+  const handleHelpDialogClose = () => {
+    setHelpDialogOpen(false);
   }
 
   const uploadScore = () => {
@@ -326,7 +338,7 @@ export default function App() {
 
 
   const [autoColoring, setAutoColoring] = useState(0);
-  const handleAutoColoring = () => { setAutoColoring(1 - autoColoring) };
+  const handleAutoColoring = () => { setAutoColoring(2 - autoColoring) };
 
   const [font, setFont] = useState("Times New Roman");
   const handleFontChange = (event) => {
@@ -471,12 +483,44 @@ export default function App() {
           </Button>
           <Button
             color="primary"
+            onClick={handleClickHelpDialogOpen}
             className={classes.menuButton}
             startIcon={<HelpIcon />}
             size='large'
           >
             Help
           </Button>
+          <Dialog
+            open={helpDialogOpen}
+            onClose={handleHelpDialogClose}
+            fullWidth
+            maxWidth="md"
+            fullHeight
+            minHeight="md"
+          >
+            <DialogTitle >Looking for help?</DialogTitle>
+            <DialogContent>
+              <Typography variant="h6">
+                Instructions
+              </Typography>
+              <br />
+              <Divider />
+              <br />
+              <Typography variant="h6">
+                Feedback survey
+              </Typography>
+              <Typography variant="subtitle1">
+                If you have any suggestions for this app, please take our <Link href="https://forms.gle/C8VL4kUgg3XPmHGu7" underline="none">user experience survey</Link>, thank you!
+              </Typography>
+              <br />
+              <Divider />
+              <br />
+              <Typography variant="h6">
+                Acknowledgement
+              </Typography>
+              <br />
+            </DialogContent>
+          </Dialog>
         </Toolbar>
         <Divider />
         <Toolbar className={classes.customizeToolbar}>
@@ -966,6 +1010,7 @@ export default function App() {
 
         </Toolbar>
       </AppBar>
+      <Hint file={file} />
       <OSMD
         osmd={osmd}
         file={file}
@@ -990,7 +1035,6 @@ export default function App() {
         ledgerWidth={ledgerWidthArr[thickness.ledgerWidth]}
         stemWidth={stemWidthArr[thickness.stemWidth]}
       />
-      <Hint file={file} />
     </div>
 
   );

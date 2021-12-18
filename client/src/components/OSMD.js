@@ -52,6 +52,7 @@ function OSMD(props) {
 
         osmd.setOptions({
             coloringMode: autoColoring,
+            coloringSetCustom: ['#e21c48', '#009C95', '#5E50A1', '#CF3E96', '#bcd85f', '#F99D1C', '#fff32b', '#000000'],
             // colorStemsLikeNoteheads: stemColoring,
             defaultFontFamily: font,
             // defaultFontStyle: 0,
