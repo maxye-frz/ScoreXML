@@ -22,6 +22,7 @@ router.post('/', async (req, res) => {
     const score = new ScoreMusicXML({
         name: req.body.name,
         musicxml: req.body.musicxml
+        // createdAt: req.body.createdAt
     })
     try {
         const newScore = await score.save()

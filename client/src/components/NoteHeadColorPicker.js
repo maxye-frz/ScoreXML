@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { TwitterPicker } from 'react-color';
+import { GithubPicker } from 'react-color';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-import FormatColorFillIcon from '@material-ui/icons/FormatColorFill';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles({
@@ -56,15 +56,15 @@ function NoteHeadColorPicker(props) {
             <Tooltip classes={{ tooltip: classes.tooltip }} title="Note head color" arrow={true}>
 
                 <IconButton onClick={onTogglePicker}>
-                    <FormatColorFillIcon ref={button} />
+                    <BorderColorIcon ref={button} />
                 </IconButton>
             </Tooltip>
             {
                 pickerVisible && (
                     <div style={{ position: 'absolute' }} ref={picker}>
-                        <TwitterPicker
-                            color={color}
-                            colors={noteHeadColorOptions}
+                        <GithubPicker
+                            // color={color}
+                            // colors={noteHeadColorOptions}
                             onChangeComplete={handleColorChange}
                         />
                     </div>

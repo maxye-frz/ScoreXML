@@ -9,7 +9,7 @@ const scoreSchema = new mongoose.Schema({
         type: String, 
         required: true 
     },
-    createdAt: { type: Date, expires: 3600 }
+    createdAt: { type: Date, expires: 3600, default: Date.now }
 })
 
 module.exports = mongoose.model('ScoreMusicXML', scoreSchema)

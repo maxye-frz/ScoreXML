@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { TwitterPicker } from 'react-color';
+import { GithubPicker } from 'react-color';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-import PaletteIcon from '@material-ui/icons/Palette';
+// import PaletteIcon from '@material-ui/icons/Palette';
+import FormatColorFillIcon from '@mui/icons-material/FormatColorFill';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles({
@@ -57,13 +58,13 @@ function BackgroundColorPicker(props) {
             <Tooltip classes={{ tooltip: classes.tooltip }} title="Background color" arrow={true}>
 
                 <IconButton onClick={onTogglePicker}>
-                    <PaletteIcon ref={button} />
+                    <FormatColorFillIcon ref={button} />
                 </IconButton>
             </Tooltip>
             {
                 pickerVisible && (
                     <div style={{ position: 'absolute' }} ref={picker}>
-                        <TwitterPicker
+                        <GithubPicker
                             color={color}
                             colors={backgroundColorOptions}
                             onChangeComplete={handleColorChange}

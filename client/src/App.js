@@ -30,7 +30,7 @@ import FormatBoldIcon from '@material-ui/icons/FormatBold';
 import PanToolIcon from '@material-ui/icons/PanTool';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
-import FormatColorTextIcon from '@material-ui/icons/FormatColorText';
+import FormatColorTextIcon from '@mui/icons-material/FormatColorText';
 import HelpIcon from '@material-ui/icons/Help';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
@@ -340,6 +340,11 @@ export default function App() {
   const [autoColoring, setAutoColoring] = useState(0);
   const handleAutoColoring = () => { setAutoColoring(2 - autoColoring) };
 
+  const [presetColors, setPresetColors] = useState("1");
+  const handleSetPresetColors = (e) => {
+    setPresetColors(e.target.value);
+  }
+
   const [font, setFont] = useState("Times New Roman");
   const handleFontChange = (event) => {
     setFont(event.target.value);
@@ -583,7 +588,7 @@ export default function App() {
 
             <Grid item>
 
-              <Box sx={{ width: 190 }}>
+              <Box sx={{ width: 300 }}>
                 <Grid container spacing={1} alignItems="center">
                   <Grid item>
                     <BackgroundColorPicker
@@ -596,6 +601,23 @@ export default function App() {
                       color={noteHeadColor}
                       handleChange={handleChangeNoteHeadColor}
                     />
+                  </Grid>
+                  <Grid item>
+                    <Tooltip classes={{ tooltip: classes.tooltip }} title="Preset colors" arrow={true}>
+
+                      <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 100 }} >
+                        <Select
+                          native
+                          value={presetColors}
+                          onChange={handleSetPresetColors}
+                          input={<OutlinedInput classes={{ input: classes.input }} />}
+                        >
+                          <option value={"1"}>Preset 1</option>
+                          <option value={"2"}>Preset 2</option>
+                          <option value={"3"}>Preset 3</option>
+                        </Select>
+                      </FormControl>
+                    </Tooltip>
                   </Grid>
                   <Grid item>
                     <Tooltip classes={{ tooltip: classes.tooltip }} title="Automatic color" arrow={true}>
