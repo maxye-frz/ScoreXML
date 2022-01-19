@@ -241,7 +241,7 @@ export default function App() {
   const [thickness, setThickness] = useState({
     selected: 'staff width',
     staffWidth: 6,
-    staffDistance: 2,
+    staffDistance: 1,
     ledgerWidth: 4,
     stemWidth: 3
   })
@@ -353,9 +353,23 @@ export default function App() {
     } else if (val === "2") {
       setBackgroundColor('#f1e5dc');
     } else if (val === "3") {
-      setBackgroundColor('#e9f5db');
-    } else if (val === "4") {
       setBackgroundColor('#DCE8F1');
+    } else if (val === "4") {
+      setBackgroundColor('#FFFFFF');
+      setZoom(150);
+      setDrawMeasureInterval(4);
+      setDrawMeasureStart(false);
+    } else if (val === "5") {
+      setBackgroundColor('#FFFFFF');
+      setZoom(120);
+      setDrawMeasureStart(true);
+      setFingeringPosition("above");
+      setThickness(thickness => ({
+        staffWidth: 3,
+        staffDistance: 1,
+        ledgerWidth: 5,
+        stemWidth: 6
+      }));
     }
   }
 
@@ -369,6 +383,8 @@ export default function App() {
       setNoteHeadColor('#000000');
     } else if (val === "4") {
       setNoteHeadColor('#000000');
+    } else if (val === "5") {
+
     }
   }
 
@@ -541,7 +557,7 @@ export default function App() {
                 from The Peabody Institute of The Johns Hopkins University and Reid Sczerba 
                 from JHU Center for Educational Resources. The application is sponsored by
                 <Link href="https://cer.jhu.edu/techfellows" underline="none">
-                JHU Technology Fellowship Grant Program</Link>. The objective of this application is
+                 JHU Technology Fellowship Grant Program</Link>. The objective of this application is
                 to improve accessibility in the process of music teaching by providing customizable
                 music notations on digital devices. Special thanks to <Link href="https://phonicscore.com" underline="none">Phonicscore</Link> for developing 
                 <Link href="https://github.com/opensheetmusicdisplay/opensheetmusicdisplay" underline="none"> OpenSheetMusicDisplay</Link> renderer, which is the fundamental building block to this project.
@@ -620,7 +636,7 @@ export default function App() {
 
             <Grid item>
 
-              <Box sx={{ width: 300 }}>
+              <Box sx={{ width: 180 }}>
                 <Grid container spacing={1} alignItems="center">
                   <Grid item>
                     <BackgroundColorPicker
@@ -633,24 +649,6 @@ export default function App() {
                       color={noteHeadColor}
                       handleChange={handleChangeNoteHeadColor}
                     />
-                  </Grid>
-                  <Grid item>
-                    <Tooltip classes={{ tooltip: classes.tooltip }} title="Preset colors" arrow={true}>
-
-                      <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 100 }} >
-                        <Select
-                          native
-                          value={presetColors}
-                          onChange={handleSetPresetColors}
-                          input={<OutlinedInput classes={{ input: classes.input }} />}
-                        >
-                          <option value={"1"}>Default</option>
-                          <option value={"2"}>Light 1</option>
-                          <option value={"3"}>Light 2</option>
-                          <option value={"4"}>Light 3</option>                    
-                        </Select>
-                      </FormControl>
-                    </Tooltip>
                   </Grid>
                   <Grid item>
                     <Tooltip classes={{ tooltip: classes.tooltip }} title="Automatic color" arrow={true}>
@@ -867,6 +865,26 @@ export default function App() {
                 </Grid>
               </Box>
             </Grid>
+
+            <Grid item>
+                    <Tooltip classes={{ tooltip: classes.tooltip }} title="Presets" arrow={true}>
+
+                      <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 100 }} >
+                        <Select
+                          native
+                          value={presetColors}
+                          onChange={handleSetPresetColors}
+                          input={<OutlinedInput classes={{ input: classes.input }} />}
+                        >
+                          <option value={"1"}>Default</option>
+                          <option value={"2"}>Light 1</option>
+                          <option value={"3"}>Light 2</option>
+                          <option value={"4"}>Present mode</option>
+                          <option value={"5"}>Easy to read</option>                   
+                        </Select>
+                      </FormControl>
+                    </Tooltip>
+                  </Grid>
 
 
 
