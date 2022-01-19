@@ -26,7 +26,12 @@ function BackgroundColorPicker(props) {
         setColor(e.hex);
     }
 
-    const backgroundColorOptions = ['#FFFFFF', '#e8e8e4', '#d8e2dc', '#f8edeb', '#ffe5d9', '#ffd7ba', '#eddcd2'];
+    const backgroundColorOptions = [
+        '#f5f5f4', '#e5e6e4', '#d2d2cf', '#dcdcda', '#f6efeb', '#eee7df', '#f6f4ea', '#eceae2',
+        '#797d62', '#9b9b7a', '#d9ae94', '#e5c59e', '#f1dca7', '#e4b074', '#d08c60', '#997b66',
+        '#eff2d0', '#e4e9c1', '#d8e0b2', '#c0ce93', '#b4c584', '#a8bc74', '#9cb365', '#90a955',
+        '#cb9b6c', '#d4a373', '#deb68a', '#e7c8a0', '#f1dbb7', '#faedcd', '#fcf4d7', '#fefae0',
+    ];
 
     const picker = useRef();
     const button = useRef();

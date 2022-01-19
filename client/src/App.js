@@ -343,6 +343,33 @@ export default function App() {
   const [presetColors, setPresetColors] = useState("1");
   const handleSetPresetColors = (e) => {
     setPresetColors(e.target.value);
+    setPresetBackgoundColors(e.target.value);
+    setPresetNoteHeadColors(e.target.value);
+  }
+
+  const setPresetBackgoundColors = (val) => {
+    if (val === "1") {
+      setBackgroundColor('#FFFFFF');
+    } else if (val === "2") {
+      setBackgroundColor('#f1e5dc');
+    } else if (val === "3") {
+      setBackgroundColor('#e9f5db');
+    } else if (val === "4") {
+      setBackgroundColor('#DCE8F1');
+    }
+  }
+
+
+  const setPresetNoteHeadColors = (val) => {
+    if (val === "1") {
+      setNoteHeadColor('#000000');
+    } else if (val === "2") {
+      setNoteHeadColor('#000000');
+    } else if (val === "3") {
+      setNoteHeadColor('#000000');
+    } else if (val === "4") {
+      setNoteHeadColor('#000000');
+    }
   }
 
   const [font, setFont] = useState("Times New Roman");
@@ -451,6 +478,9 @@ export default function App() {
           >
             <DialogTitle >Share and embed</DialogTitle>
             <DialogContent>
+              <Typography variant="subtitle1">
+                The following links are valid for 30 days.
+              </Typography>
               <List>
                 <ListItem>
                   <Tooltip classes={{ tooltip: classes.tooltip }} title="copy to clipboard" arrow={true}>
@@ -493,7 +523,7 @@ export default function App() {
             startIcon={<HelpIcon />}
             size='large'
           >
-            Help
+            About
           </Button>
           <Dialog
             open={helpDialogOpen}
@@ -503,10 +533,18 @@ export default function App() {
             fullHeight
             minHeight="md"
           >
-            <DialogTitle >Looking for help?</DialogTitle>
+            <DialogTitle >About</DialogTitle>
             <DialogContent>
-              <Typography variant="h6">
-                Instructions
+              <Typography variant="subtitle1">
+                ScoreXML is developed by Nanxi Ye, advised by 
+                <Link href="https://agustinmuriago.com/" underline="none"> Dr. Agustin Muriago </Link> 
+                from The Peabody Institute of The Johns Hopkins University and Reid Sczerba 
+                from JHU Center for Educational Resources. The application is sponsored by
+                <Link href="https://cer.jhu.edu/techfellows" underline="none">
+                JHU Technology Fellowship Grant Program</Link>. The objective of this application is
+                to improve accessibility in the process of music teaching by providing customizable
+                music notations on digital devices. Special thanks to <Link href="https://phonicscore.com" underline="none">Phonicscore</Link> for developing 
+                <Link href="https://github.com/opensheetmusicdisplay/opensheetmusicdisplay" underline="none"> OpenSheetMusicDisplay</Link> renderer, which is the fundamental building block to this project.
               </Typography>
               <br />
               <Divider />
@@ -516,12 +554,6 @@ export default function App() {
               </Typography>
               <Typography variant="subtitle1">
                 If you have any suggestions for this app, please take our <Link href="https://forms.gle/C8VL4kUgg3XPmHGu7" underline="none">user experience survey</Link>, thank you!
-              </Typography>
-              <br />
-              <Divider />
-              <br />
-              <Typography variant="h6">
-                Acknowledgement
               </Typography>
               <br />
             </DialogContent>
@@ -612,9 +644,10 @@ export default function App() {
                           onChange={handleSetPresetColors}
                           input={<OutlinedInput classes={{ input: classes.input }} />}
                         >
-                          <option value={"1"}>Preset 1</option>
-                          <option value={"2"}>Preset 2</option>
-                          <option value={"3"}>Preset 3</option>
+                          <option value={"1"}>Default</option>
+                          <option value={"2"}>Light 1</option>
+                          <option value={"3"}>Light 2</option>
+                          <option value={"4"}>Light 3</option>                    
                         </Select>
                       </FormControl>
                     </Tooltip>
