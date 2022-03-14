@@ -553,14 +553,14 @@ export default function App() {
             <DialogContent>
               <Typography variant="subtitle1">
                 ScoreXML is developed by Nanxi Ye, advised by 
-                <Link href="https://agustinmuriago.com/" underline="none"> Dr. Agustin Muriago </Link> 
+                <Link href="https://agustinmuriago.com/" target="_blank" underline="none"> Dr. Agustin Muriago </Link> 
                 from The Peabody Institute of The Johns Hopkins University and Reid Sczerba 
                 from JHU Center for Educational Resources. The application is sponsored by
-                <Link href="https://cer.jhu.edu/techfellows" underline="none">
+                <Link href="https://cer.jhu.edu/techfellows" target="_blank" underline="none" >
                  JHU Technology Fellowship Grant Program</Link>. The objective of this application is
                 to improve accessibility in the process of music teaching by providing customizable
-                music notations on digital devices. Special thanks to <Link href="https://phonicscore.com" underline="none">Phonicscore</Link> for developing 
-                <Link href="https://github.com/opensheetmusicdisplay/opensheetmusicdisplay" underline="none"> OpenSheetMusicDisplay</Link> renderer, which is the fundamental building block to this project.
+                music notations on digital devices. Special thanks to <Link href="https://phonicscore.com" target="_blank" underline="none">Phonicscore</Link> for developing 
+                <Link href="https://github.com/opensheetmusicdisplay/opensheetmusicdisplay" target="_blank" underline="none"> OpenSheetMusicDisplay</Link> renderer, which is the fundamental building block to this project.
               </Typography>
               <br />
               <Divider />
@@ -569,7 +569,7 @@ export default function App() {
                 Feedback survey
               </Typography>
               <Typography variant="subtitle1">
-                If you have any suggestions for this app, please take our <Link href="https://forms.gle/C8VL4kUgg3XPmHGu7" underline="none">user experience survey</Link>, thank you!
+                If you have any suggestions for this app, please take our <Link href="https://forms.gle/C8VL4kUgg3XPmHGu7" target="_blank" underline="none">user experience survey</Link>, thank you!
               </Typography>
               <br />
             </DialogContent>
@@ -817,7 +817,7 @@ export default function App() {
                       aria-labelledby="input-slider"
                     />
                   </Grid>
-                  <Grid item>
+                  <Grid item xs>
                     <Input
                       value={sliderValue(thickness.selected)}
                       size="small"
@@ -876,210 +876,17 @@ export default function App() {
                           onChange={handleSetPresetColors}
                           input={<OutlinedInput classes={{ input: classes.input }} />}
                         >
-                          <option value={"1"}>Default</option>
-                          <option value={"2"}>Light 1</option>
-                          <option value={"3"}>Light 2</option>
-                          <option value={"4"}>Present mode</option>
-                          <option value={"5"}>Easy to read</option>                   
+                          <option value={"1"}>Preset 1</option>
+                          <option value={"2"}>Preset 2</option>
+                          <option value={"3"}>Preset 3</option>
+                          <option value={"4"}>Preset 4</option>
+                          <option value={"5"}>Preset 5</option>                   
                         </Select>
                       </FormControl>
                     </Tooltip>
                   </Grid>
-
-
-
           </Grid>
 
-          {/* <Divider flexItem orientation="vertical" className={classes.divider} /> */}
-
-          {/* <IconButton onClick={handleBold}>
-                <FormatBoldIcon />
-            </IconButton> */}
-
-
-          {/* <BackgroundColorPicker
-            color={backgroundColor}
-            handleChange={handleChangeBackgroundColor}
-          />
-
-          <NoteHeadColorPicker
-            color={noteHeadColor}
-            handleChange={handleChangeNoteHeadColor}
-          />
-
-
-          <Tooltip classes={{ tooltip: classes.tooltip }} title="Automatic color" arrow={true}>
-
-            <ToggleButton
-              className={classes.toggleButton}
-              value="autoColoring"
-              selected={autoColoring}
-              onChange={handleAutoColoring}
-            >
-              <FormatColorTextIcon />
-            </ToggleButton>
-          </Tooltip> */}
-
-          {/* <Divider flexItem orientation="vertical" className={classes.divider} /> */}
-
-          {/* <Tooltip classes={{ tooltip: classes.tooltip }} title="Show fingering" arrow={true}>
-
-            <ToggleButton
-              className={classes.toggleButton}
-              value="drawFingerings"
-              selected={drawFingerings}
-              onChange={handleDrawFingerings}
-            >
-              <PanToolIcon />
-            </ToggleButton>
-
-          </Tooltip>
-          <Tooltip classes={{ tooltip: classes.tooltip }} title="Expand fingering" arrow={true}>
-
-            <ToggleButton
-              className={classes.toggleButton}
-              value="expandFingerings"
-              selected={!expandFingerings}
-              onChange={handleExpandFingerings}
-            >
-              <ImportExportIcon />
-            </ToggleButton>
-
-          </Tooltip>
-
-          <Tooltip classes={{ tooltip: classes.tooltip }} title="Fingering position" arrow={true}>
-
-            <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 100 }} >
-              <Select
-                native
-                value={fingeringPosition}
-                onChange={handleSetFingeringPosition}
-                input={<OutlinedInput classes={{ input: classes.input }} />}
-              >
-                <option value={"above"}>Above</option>
-                <option value={"below"}>Below</option>
-                <option value={"left"}>Left</option>
-                <option value={"right"}>Right</option>
-              </Select>
-            </FormControl>
-          </Tooltip> */}
-          {/* <Divider flexItem orientation="vertical" className={classes.divider} /> */}
-          {/* <Tooltip classes={{ tooltip: classes.tooltip }} title="Flat beam" arrow={true}>
-
-            <ToggleButton
-              className={classes.toggleButton}
-              value="isFlatBeam"
-              selected={isFlatBeam}
-              onChange={handleIsFlatBeam}
-            >
-              <DragHandleIcon />
-            </ToggleButton>
-
-          </Tooltip> */}
-
-          {/* <Divider flexItem orientation="vertical" className={classes.divider} /> */}
-          {/* <Tooltip classes={{ tooltip: classes.tooltip }} title="Show measure number new line" arrow={true}>
-
-            <ToggleButton
-              className={classes.toggleButton}
-              value="drawMeasureStart"
-              selected={drawMeasureStart}
-              onChange={handleDrawMeasureStart}
-            >
-              <FormatListNumberedIcon />
-            </ToggleButton>
-          </Tooltip>
-          <Tooltip classes={{ tooltip: classes.tooltip }} title="Measure number interval" arrow={true}>
-
-            <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 60 }}>
-              <Select
-                native
-                value={drawMeasureInterval}
-                onChange={handleDrawMeasureInterval}
-                input={<OutlinedInput classes={{ input: classes.input }} />}
-              >
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-                <option value={4}>4</option>
-              </Select>
-            </FormControl>
-          </Tooltip> */}
-
-          {/* <Divider flexItem orientation="vertical" className={classes.divider} /> */}
-
-          {/* <Tooltip classes={{ tooltip: classes.tooltip }} title="Show in one line" arrow={true}>
-
-            <IconButton onClick={handleSingleHorizontal}>
-              <ArrowRightAltIcon />
-            </IconButton>
-          </Tooltip> */}
-          {/* <Divider flexItem orientation="vertical" className={classes.divider} /> */}
-
-          {/* <Box sx={{ width: 350 }}>
-            <Grid container spacing={2} alignItems="center">
-              <Grid item>
-                <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 160 }}>
-                  <Select
-                    native
-                    value={thickness.selected}
-                    onChange={handleFieldChange}
-                    input={<OutlinedInput classes={{ input: classes.input }} />}
-                  >
-                    <option value={'staff width'}>staff width</option>
-                    <option value={'staff distance'}>staff distance</option>
-                    <option value={'ledger width'}>ledger width</option>
-                    <option value={'stem width'}>stem width</option>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs>
-                <Slider
-                  step={1}
-                  min={0}
-                  max={10}
-                  value={sliderValue(thickness.selected)}
-                  onChange={handleSliderChange}
-                  aria-labelledby="input-slider"
-                />
-              </Grid>
-              <Grid item>
-                <Input
-                  value={sliderValue(thickness.selected)}
-                  size="small"
-                  onChange={handleThicknessInputChange}
-                  onBlur={handleBlur}
-                  inputProps={{
-                    step: 1,
-                    min: 0,
-                    max: 10,
-                    type: 'number',
-                    'aria-labelledby': 'input-slider',
-                  }}
-                />
-              </Grid>
-            </Grid>
-          </Box> */}
-
-          {/* <Divider flexItem orientation="vertical" className={classes.divider} /> */}
-
-          {/* <Button onClick={handleDecrement}><ZoomOutIcon /></Button>
-          <Tooltip classes={{ tooltip: classes.tooltip }} title="Zoom" arrow={true}>
-
-            <TextField
-              value={zoom}
-              size="small"
-              variant="outlined"
-              style={{ minWidth: 80 }}
-              // disableUnderline={false}
-              className={classes.zoomTextField}
-              InputProps={{
-                endAdornment: <InputAdornment position="end">%</InputAdornment>,
-              }}
-              onChange={changeZoom}
-            />
-          </Tooltip>
-          <Button onClick={handleIncrement}><ZoomInIcon /></Button> */}
 
         </Toolbar>
       </AppBar>
