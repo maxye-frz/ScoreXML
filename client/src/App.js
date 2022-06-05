@@ -449,7 +449,7 @@ export default function App() {
 
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            ScoreXML
+            Notice
           </Typography>
           <Button
             color="primary"
@@ -552,7 +552,7 @@ export default function App() {
             <DialogTitle >About</DialogTitle>
             <DialogContent>
               <Typography variant="subtitle1">
-                ScoreXML is developed by Nanxi Ye, advised by 
+                Notice(ScoreXML) is developed by Nanxi Ye, advised by 
                 <Link href="https://agustinmuriago.com/" target="_blank" underline="none"> Dr. Agustin Muriago </Link> 
                 from The Peabody Institute of The Johns Hopkins University and Reid Sczerba 
                 from JHU Center for Educational Resources. The application is sponsored by
