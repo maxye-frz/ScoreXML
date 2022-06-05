@@ -5,7 +5,7 @@ import NoteHeadColorPicker from './components/NoteHeadColorPicker';
 import Hint from './components/Hint'
 import { jsPDF } from 'jspdf';
 import 'svg2pdf.js';
-import React, { useState, useEffect } from 'react';
+import React, { useState,} from 'react';
 import { makeStyles, styled } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -106,9 +106,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NumInput = styled(MuiInput)`
-  width: 40px;
-`;
+// const NumInput = styled(MuiInput)`
+//   width: 40px;
+// `;
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -438,9 +438,9 @@ export default function App() {
 
   const [osmd, setOsmd] = useState(new window.opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", { backend: "svg", autoResize: true }));
 
-  function valuetext(value) {
-    return `${value}`;
-  }
+  // function valuetext(value) {
+  //   return `${value}`;
+  // }
 
 
   return (
