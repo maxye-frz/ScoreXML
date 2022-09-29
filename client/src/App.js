@@ -200,7 +200,6 @@ export default function App() {
 
   const uploadScore = () => {
     ScoreApi.create(fileName[0], file).then((m) => {
-      // console.log(m._id);
       setId(m._id);
     })
       .then(() => {
