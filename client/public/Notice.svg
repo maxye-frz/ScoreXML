@@ -7,15 +7,15 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   sodipodi:docname="512 logo.svg"
-   inkscape:version="1.0 (4035a4f, 2020-05-01)"
-   id="svg1551"
+   width="2200"
+   height="1600"
+   viewBox="0 0 582.083 423.33335"
    version="1.1"
-   viewBox="0 0 135.46666 135.46667"
-   height="512"
-   width="512">
+   id="svg8"
+   inkscape:version="1.0 (4035a4f, 2020-05-01)"
+   sodipodi:docname="notice logo.svg">
   <defs
-     id="defs1545">
+     id="defs2">
     <clipPath
        id="clipPath849"
        clipPathUnits="userSpaceOnUse">
@@ -25,43 +25,43 @@
     </clipPath>
   </defs>
   <sodipodi:namedview
-     inkscape:window-maximized="0"
-     inkscape:window-y="23"
-     inkscape:window-x="248"
-     inkscape:window-height="952"
-     inkscape:window-width="1252"
-     units="px"
-     showgrid="false"
-     inkscape:document-rotation="0"
-     inkscape:current-layer="layer1"
-     inkscape:document-units="mm"
-     inkscape:cy="246.26767"
-     inkscape:cx="280.66264"
-     inkscape:zoom="0.98994949"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     borderopacity="1.0"
-     bordercolor="#666666"
+     id="base"
      pagecolor="#ffffff"
-     id="base" />
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="1135.8798"
+     inkscape:cy="830.35714"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1574"
+     inkscape:window-height="950"
+     inkscape:window-x="501"
+     inkscape:window-y="56"
+     inkscape:window-maximized="0" />
   <metadata
-     id="metadata1548">
+     id="metadata5">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     id="layer1"
+     inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     inkscape:label="Layer 1">
+     id="layer1">
     <g
-       transform="matrix(0.08289871,0,0,-0.08289871,-10.636886,111.39171)"
+       transform="matrix(0.35277777,0,0,-0.35277777,-44.853203,463.26312)"
        clip-path="url(#clipPath849)"
        id="g845">
       <g

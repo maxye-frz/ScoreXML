@@ -1,11 +1,12 @@
 import UploadDialog from './components/UploadDialog';
 import OSMD from './components/OSMD';
+import Logo from './Notice.svg'
 import BackgroundColorPicker from './components/BackgroundColorPicker';
 import NoteHeadColorPicker from './components/NoteHeadColorPicker';
 import Hint from './components/Hint'
 import { jsPDF } from 'jspdf';
 import 'svg2pdf.js';
-import React, { useState,} from 'react';
+import React, { useState, } from 'react';
 import { makeStyles, styled } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -73,6 +74,10 @@ const useStyles = makeStyles((theme) => ({
   title: {
     marginRight: 18,
     flexGrow: 1
+  },
+  logo: {
+    marginRight: 18,
+    maxWidth: 160,
   },
   formControl: {
     margin: theme.spacing(1),
@@ -449,7 +454,15 @@ export default function App() {
 
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Notice
+            {/* Notice */}
+            <Box
+              component="img"
+              sx={{
+                height: 80,
+              }}
+              alt="Your logo."
+              src={Logo}
+            />
           </Typography>
           <Button
             color="primary"
@@ -549,18 +562,33 @@ export default function App() {
             fullHeight
             minHeight="md"
           >
-            <DialogTitle >About</DialogTitle>
             <DialogContent>
+              <Typography variant="h6">
+                About
+              </Typography>
               <Typography variant="subtitle1">
-                Notice(ScoreXML) is developed by Nanxi Ye, advised by 
-                <Link href="https://agustinmuriago.com/" target="_blank" underline="none"> Dr. Agustin Muriago </Link> 
-                from The Peabody Institute of The Johns Hopkins University and Reid Sczerba 
-                from JHU Center for Educational Resources. The application is sponsored by
-                <Link href="https://cer.jhu.edu/techfellows" target="_blank" underline="none" >
-                 JHU Technology Fellowship Grant Program</Link>. The objective of this application is
-                to improve accessibility in the process of music teaching by providing customizable
-                music notations on digital devices. Special thanks to <Link href="https://phonicscore.com" target="_blank" underline="none">Phonicscore</Link> for developing 
-                <Link href="https://github.com/opensheetmusicdisplay/opensheetmusicdisplay" target="_blank" underline="none"> OpenSheetMusicDisplay</Link> renderer, which is the fundamental building block to this project.
+                In an effort to address accessibility in music notation beyond enlarging a score, guidelines 
+                provided by the U.K. Association for Accessible Formats offer suggestions to create Modified 
+                Stave Notation. These modifications include adjusting the staff width, layout, spacing, 
+                background color, and note-head color. The goal for this platform is to facilitate the 
+                reading and performing of music through notation that can be customized according to each 
+                person’s needs.
+              </Typography>
+              <br />
+              <Divider />
+              <br />
+              <Typography variant="h6">
+                Credits
+              </Typography>
+              <Typography variant="subtitle1">
+                <em>Notice</em> was developed at the Johns Hopkins University by Nanxi Ye (Whiting School of Engineering)
+                and Agustin Muriago (Peabody Institute), with support from a grant awarded by the Center for 
+                Educational Resources at Johns Hopkins.
+                Special thanks to Reid Sczerba (Center for Educational Resources, Johns Hopkins University) 
+                and to <Link href="https://phonicscore.com" target="_blank" underline="none">Phonicscore</Link> 
+                for developing <Link href="https://github.com/opensheetmusicdisplay/opensheetmusicdisplay" 
+                target="_blank" underline="none"> OpenSheetMusicDisplay</Link> renderer—the fundamental building 
+                block to this project.
               </Typography>
               <br />
               <Divider />
@@ -837,7 +865,7 @@ export default function App() {
             </Grid>
 
             <Grid item>
-              <Box sx={{ width: 230 }}>
+              <Box sx={{ mt: 1, width: 230 }}>
                 <Grid container spacing={1} alignItems="center">
                   <Grid item>
                     <Button onClick={handleDecrement}><ZoomOutIcon /></Button>
@@ -867,24 +895,24 @@ export default function App() {
             </Grid>
 
             <Grid item>
-                    <Tooltip classes={{ tooltip: classes.tooltip }} title="Presets" arrow={true}>
+              <Tooltip classes={{ tooltip: classes.tooltip }} title="Presets" arrow={true}>
 
-                      <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 100 }} >
-                        <Select
-                          native
-                          value={presetColors}
-                          onChange={handleSetPresetColors}
-                          input={<OutlinedInput classes={{ input: classes.input }} />}
-                        >
-                          <option value={"1"}>Preset 1</option>
-                          <option value={"2"}>Preset 2</option>
-                          <option value={"3"}>Preset 3</option>
-                          <option value={"4"}>Preset 4</option>
-                          <option value={"5"}>Preset 5</option>                   
-                        </Select>
-                      </FormControl>
-                    </Tooltip>
-                  </Grid>
+                <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 100 }} >
+                  <Select
+                    native
+                    value={presetColors}
+                    onChange={handleSetPresetColors}
+                    input={<OutlinedInput classes={{ input: classes.input }} />}
+                  >
+                    <option value={"1"}>Preset 1</option>
+                    <option value={"2"}>Preset 2</option>
+                    <option value={"3"}>Preset 3</option>
+                    <option value={"4"}>Preset 4</option>
+                    <option value={"5"}>Preset 5</option>
+                  </Select>
+                </FormControl>
+              </Tooltip>
+            </Grid>
           </Grid>
 
 
