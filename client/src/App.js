@@ -6,7 +6,7 @@ import NoteHeadColorPicker from './components/NoteHeadColorPicker';
 import Hint from './components/Hint'
 import { jsPDF } from 'jspdf';
 import 'svg2pdf.js';
-import React, { useState, } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, styled } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -140,15 +140,20 @@ export default function App() {
   const getScore = (db_id) => {
     // console.log("id: ", db_id);
     ScoreApi.get(db_id).then((m) => {
-      // console.log(m);
       setFileName(m.name);
       setFile(m.musicxml);
     })
   }
 
-  if (shareId) {
-    getScore(shareId);
-  }
+  useEffect(() => {
+    if (shareId) {
+      getScore(shareId);
+    }
+  }, [])
+
+  // if (shareId) {
+  //   getScore(shareId);
+  // }
 
   const [id, setId] = useState('');
 
